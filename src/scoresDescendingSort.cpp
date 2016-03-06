@@ -20,6 +20,7 @@ struct student {
 	int score;
 };
 
-void * scoresDescendingSort(struct student *students, int len) {
+void * scoresDescendingSort(struct student *students, int len) 
+{
 	return NULL;
 }
