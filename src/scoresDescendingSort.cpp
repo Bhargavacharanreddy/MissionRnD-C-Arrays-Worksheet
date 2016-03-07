@@ -12,15 +12,42 @@ ERROR CASES: Return NULL for invalid Inputs.
 
 NOTES:
 */
-
-#include <stdio.h>
-
-struct student {
+#include<stdlib.h>
+struct student
+{
 	char name[10];
 	int score;
 };
-
-void * scoresDescendingSort(struct student *students, int len) 
+void swaping(struct student *p1, struct student *p2){
+	struct student temp = *p1;
+	*p1 = *p2;
+	*p2 = temp;
+}
+void* scoresDescendingSort(struct student *students, int len)
 {
+
+	int max, x = 0, y = 0, flag=0;
+	if (students==NULL || len < 0)
+		return NULL;
+
+	for (int i = 0; i < len - 1; i++)
+	{
+		max = students[i].score;
+		for (int j = i + 1; j < len; j++)
+		{
+			if (max <students[j].score)
+			{
+				flag = 1;
+				max = students[j].score;
+				x = j;
+			}
+		}
+		if (flag)
+		{
+			swaping(&students[i], &students[x]);
+			flag = 0;
+		}
+
+	}
 	return NULL;
 }
