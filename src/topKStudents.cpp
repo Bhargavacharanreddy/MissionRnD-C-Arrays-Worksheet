@@ -12,15 +12,41 @@ ERROR CASES: Return NULL for invalid inputs.
 
 NOTES:
 */
-
 #include <iostream>
 #include <malloc.h>
-
+#include <stddef.h>
+using namespace std;
 struct student {
 	char *name;
 	int score;
 };
-
+void swapstruct(struct student *students, int i, int j)
+{
+	struct student temp;
+	temp = students[i];
+	students[i] = students[j];
+	students[j] = temp;
+}
 struct student ** topKStudents(struct student *students, int len, int K) {
-	return NULL;
+	
+	
+	if (students == NULL || len <= 0 || K <= 0 )
+	{
+		return NULL;
+	}
+	struct student **topstuds = (struct student**)malloc(K*sizeof(students));
+	for (int i = 0; i < len; i++)
+	{
+		for (int j = i + 1; j < len; j++)
+		{
+			if (students[i].score < students[j].score)/*placing the least value at beginning*/
+			{
+				swapstruct(students, i, j);
+			}
+		}
+		if (i < K)
+			topstuds[i] = &students[i];
+
+	}
+	return(topstuds);
 }
